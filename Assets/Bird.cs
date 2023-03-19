@@ -7,6 +7,7 @@ public class Bird : MonoBehaviour
     public Rigidbody2D rb;
     public AudioSource audio;
     public AudioSource touched;
+    public float jumpSpeed = 10;
     private void Update()
     {
         if (Input.anyKey) audio.Play();
@@ -15,7 +16,7 @@ public class Bird : MonoBehaviour
     }
     void Jump()
     {
-        rb.velocity = new Vector2(0, 5);
+        rb.velocity = Vector2.up * jumpSpeed;
     }
     void OnCollisionEnter(Collision collision)
     {
