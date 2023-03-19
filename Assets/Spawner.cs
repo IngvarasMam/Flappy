@@ -15,7 +15,6 @@ public class Spawner : MonoBehaviour
             var pos = transform.position + Vector3.up*Random.Range(-randomHeight,randomHeight);
             Instantiate(prefab,pos, Quaternion.identity);
             nextPipeTime += spawnInterval;
-            if (transform.position.x < -10) Destroy(gameObject);
         }
         
     }
