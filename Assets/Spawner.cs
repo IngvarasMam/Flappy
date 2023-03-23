@@ -18,4 +18,8 @@ public class Spawner : MonoBehaviour
         }
         
     }
+    private void Start()
+    {
+        nextPipeTime = Time.time;
+    }
 }

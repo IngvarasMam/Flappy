@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Bird : MonoBehaviour
 {
@@ -8,6 +10,16 @@ public class Bird : MonoBehaviour
     public AudioSource audio;
     public AudioSource touched;
     public float jumpSpeed = 10;
+    public TMP_Text text;
+    public int score;
+    private void Start()
+    {
+        Time.timeScale = 0;
+    }
+    public void BeginGame()
+    {
+        Time.timeScale = 1;
+    }
     private void Update()
     {
         if (Input.anyKey) audio.Play();
@@ -16,13 +28,16 @@ public class Bird : MonoBehaviour
     }
     void Jump()
     {
+        transform.rotation = Quaternion.Euler(0,0,rb.velocity.y * 10);
         rb.velocity = Vector2.up * jumpSpeed;
     }
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            touched.Play();
-        }
+        SceneManager.LoadScene(0);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        score++;
+        text.text = score.ToString();
     }
 }
